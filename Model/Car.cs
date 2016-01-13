@@ -44,18 +44,19 @@ namespace Model
 
          public void ChangeOwner(Driver driver, string newnumber)
          {
-             CarPassport.Owner = driver;
-             try
+             if (driver.Category.Contains(Categor))
              {
+                CarPassport.Owner = driver;
                 driver.OwnCar(this);
-             }
-             catch (Exception exception)
-             {
-                Console.WriteLine("Не получилось изменить водителя: " + exception.Message);
-                return;
+                CarNumber = newnumber;
              }
 
-            CarNumber = newnumber;
+             else
+             {
+                throw new NoCategoryException($"Водитель {driver.Name} не имеет нужной категории {Categor}");
+            }
+
+            
             
          }
      }

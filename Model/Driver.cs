@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Model
 {
     public class Driver
     {
         private readonly DateTime _licenseDate;
         private readonly string _name;
-        private int _experience;
         
 
         public Driver(DateTime date, string name)
@@ -38,10 +38,9 @@ namespace Model
             {
                 DateTime d1 = _licenseDate;
                 DateTime d2 = DateTime.Now;
-                _experience = int.Parse((d2.Year - d1.Year).ToString());
-                return _experience;
+                return (d2 - d1).Days/365;
+               
             }
-            
         }
 
         public List<string> Category {get; set; }
@@ -58,7 +57,7 @@ namespace Model
                 }
                 else 
                 {
-                    throw new Exception ("Нет нужной категории");
+                    throw new NoCategoryException($"Водитель {Name} не имеет нужной категории {car.Categor}");
                 }
                 
                 

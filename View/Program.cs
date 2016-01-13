@@ -27,9 +27,17 @@ namespace View
 
             Driver dr= new Driver(new DateTime(1998, 11, 22), "Voldemar");
             dr.Category= new List<string>() {"B", "C"};
+            try
+            {
+                car.ChangeOwner(dr, "o777oo");
+            }
+            catch (NoCategoryException ex)
+            {
 
-            car.ChangeOwner(dr, "o777oo");
-            Console.ReadKey();
+                Console.WriteLine(ex.Message);
+            }
+            
+            
             
             dr.Category.Add("D");
             car.ChangeOwner(dr, "o777oo");
